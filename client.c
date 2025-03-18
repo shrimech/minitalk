@@ -6,7 +6,7 @@
 /*   By: shrimech <shrimech@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:56:49 by shrimech          #+#    #+#             */
-/*   Updated: 2025/02/12 03:43:43 by shrimech         ###   ########.fr       */
+/*   Updated: 2025/03/18 03:11:21 by shrimech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_isdigit(int c)
 {
-	if (c >= '0' && c <= '9')
+	if ((c >= '0' && c <= '9') || c <= 32)
 		return (1);
 	return (0);
 }
@@ -22,28 +22,29 @@ static int	ft_isdigit(int c)
 static int	ft_atoi(const char *str)
 {
 	int	num;
-	int	n;
 	int	i;
 
 	num = 0;
-	n = 1;
 	i = 0;
-	while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-			|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f'))
-		i++;
-	if (str[i] == '+')
-		i++;
-	else if (str[i] == '-')
+	while (str[i])
 	{
-		n *= -1;
+		if (!ft_isdigit(str[i]))
+			return(0);
 		i++;
 	}
+	i = 0;
+
 	while (ft_isdigit(str[i]))
 	{
-		num = (num * 10) + (str[i] - '0');
-		i++;
+		if (str[i] <= 32)
+			i++;
+		else 
+		{
+			num = (num * 10) + (str[i] - '0');
+			i++;
+		}
 	}
-	return (num * n);
+	return (num);
 }
 
 static void	ft_send_bits(int pid, char i)
@@ -53,7 +54,7 @@ static void	ft_send_bits(int pid, char i)
 	bit = 0;
 	while (bit < 8)
 	{
-		if ((i & (0x01 << bit)) != 0)
+		if ((i & (1 << bit)) != 0)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
@@ -71,6 +72,12 @@ int	main(int argc, char **argv)
 	if (argc == 3)
 	{
 		pid = ft_atoi(argv[1]);
+		if (pid == 0)
+		{
+			write(1, "Error: Enter a vali <PID>.\n", 27);
+			return(0);
+		}
+		
 		while (argv[2][i] != '\0')
 		{
 			ft_send_bits(pid, argv[2][i]);
@@ -80,9 +87,7 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		write(1, "\033[91mError: wrong format.\033[0m\n", 31);
-		write(1, "\033[33mTry: ./client <PID> <MESSAGE>\033[0m\n", 40);
-		return (1);
+		write(1, "Error: wrong format.\n", 22);
+		write(1, "Try: ./client <PID> <MESSAGE>\n", 31);
 	}
-	return (0);
 }

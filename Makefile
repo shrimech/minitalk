@@ -6,7 +6,7 @@ NAME = $(SRC:.c=)
 all: $(NAME)
 
 %: %.c
-	$(CC) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
 	@rm -f $(NAME)
@@ -15,3 +15,4 @@ fclean: clean
 
 re: fclean all
 
+.PHONY: all clean fclean re
