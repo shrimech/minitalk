@@ -6,7 +6,7 @@
 /*   By: shrimech <shrimech@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:56:58 by shrimech          #+#    #+#             */
-/*   Updated: 2025/03/18 01:49:41 by shrimech         ###   ########.fr       */
+/*   Updated: 2025/03/20 03:00:05 by shrimech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ static int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-static void	ft_handler(int signal,siginfo_t *info, void *t)
+static void	ft_handler(int signal, siginfo_t *info, void *t)
 {
 	static int	bit;
 	static int	i;
 	static int	old_pid;
-	(void)*t;
-	
+
+	(void)t;
 	if (info->si_pid != old_pid)
 	{
 		bit = 0;
@@ -88,11 +88,11 @@ static void	ft_handler(int signal,siginfo_t *info, void *t)
 
 int	main(int argc, char **argv)
 {
-	int	pid;
-	struct sigaction sa;
+	int					pid;
+	struct sigaction	sa;
+
 	sa.sa_sigaction = ft_handler;
 	sa.sa_flags = SA_SIGINFO;
-
 	(void)argv;
 	if (argc != 1)
 	{
@@ -103,8 +103,8 @@ int	main(int argc, char **argv)
 	pid = getpid();
 	ft_printf("PID : %d\n", pid);
 	ft_printf("Waiting for a message...\n");
-	sigaction(SIGUSR1, &sa , NULL);
-	sigaction(SIGUSR2, &sa , NULL);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
 		pause();
 }

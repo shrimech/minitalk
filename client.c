@@ -6,7 +6,7 @@
 /*   By: shrimech <shrimech@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:56:49 by shrimech          #+#    #+#             */
-/*   Updated: 2025/03/18 03:11:21 by shrimech         ###   ########.fr       */
+/*   Updated: 2025/03/20 02:31:04 by shrimech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,15 @@ static int	ft_atoi(const char *str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			return(0);
+			return (0);
 		i++;
 	}
 	i = 0;
-
 	while (ft_isdigit(str[i]))
 	{
 		if (str[i] <= 32)
 			i++;
-		else 
+		else
 		{
 			num = (num * 10) + (str[i] - '0');
 			i++;
@@ -74,10 +73,9 @@ int	main(int argc, char **argv)
 		pid = ft_atoi(argv[1]);
 		if (pid == 0)
 		{
-			write(1, "Error: Enter a vali <PID>.\n", 27);
-			return(0);
+			write(1, "Error: Enter a valid <PID>.\n", 27);
+			return (0);
 		}
-		
 		while (argv[2][i] != '\0')
 		{
 			ft_send_bits(pid, argv[2][i]);
