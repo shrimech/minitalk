@@ -6,7 +6,7 @@
 /*   By: shrimech <shrimech@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:56:49 by shrimech          #+#    #+#             */
-/*   Updated: 2025/03/20 02:31:04 by shrimech         ###   ########.fr       */
+/*   Updated: 2025/03/21 01:10:28 by shrimech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_isdigit(int c)
 {
-	if ((c >= '0' && c <= '9') || c <= 32)
+	if ((c >= '0' && c <= '9'))
 		return (1);
 	return (0);
 }
@@ -35,13 +35,8 @@ static int	ft_atoi(const char *str)
 	i = 0;
 	while (ft_isdigit(str[i]))
 	{
-		if (str[i] <= 32)
-			i++;
-		else
-		{
-			num = (num * 10) + (str[i] - '0');
-			i++;
-		}
+		num = (num * 10) + (str[i] - '0');
+		i++;
 	}
 	return (num);
 }

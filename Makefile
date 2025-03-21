@@ -5,7 +5,7 @@ NAME_SR			=	server
 NAME_CL			=	client
 CC				=	cc
 RM				=	rm -f
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g
 
 
 all : $(NAME_CL) $(NAME_SR)
