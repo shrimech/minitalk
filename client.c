@@ -6,7 +6,7 @@
 /*   By: shrimech <shrimech@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:56:49 by shrimech          #+#    #+#             */
-/*   Updated: 2025/03/21 01:10:28 by shrimech         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:47:39 by shrimech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv)
 			ft_send_bits(pid, argv[2][i]);
 			i++;
 		}
-		ft_send_bits(pid, '\n');
+		//ft_send_bits(pid, '\n');
 	}
 	else
 	{

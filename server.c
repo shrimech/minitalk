@@ -6,7 +6,7 @@
 /*   By: shrimech <shrimech@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 01:56:58 by shrimech          #+#    #+#             */
-/*   Updated: 2025/03/20 03:00:05 by shrimech         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:26:44 by shrimech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	ft_handler(int signal, siginfo_t *info, void *t)
 	(void)t;
 	if (info->si_pid != old_pid)
 	{
+		ft_printf("\n");
 		bit = 0;
 		i = 0;
 	}
